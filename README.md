@@ -44,12 +44,16 @@ Replace `PF-10` with the portfolio id you want. The response is JSON with one ro
       "policy_count": 180,
       "earned_premium_dkk": 520927.8,
       "incurred_loss_dkk": 1183355.8,
+      "loss_ratio": 2.27,
       "claim_count": 24.0,
-      "largest_claim_dkk": 269418.26,
-      "loss_ratio": 2.27
+      "largest_claim_dkk": 269418.26
     }
   ]
 }
 ```
 
 The table is also printed to the server console. An unknown portfolio id returns `404` with an error message.
+
+## Summary of the work
+
+I created a server that can accept an HTTP GET request and return the desired portfolio data. I also created a Panel interface so a non-technical user can interact with it. The data is loaded into a pandas DataFrame when the server starts, which is more efficient than reading the CSV files on every request.
