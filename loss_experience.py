@@ -106,4 +106,12 @@ def loss_experience(policy_table: pd.DataFrame, portfolio_id: str) -> pd.DataFra
         largest_claim_dkk=("largest_claim_dkk", "max"),
     )
     by_peril["loss_ratio"] = by_peril["incurred_loss_dkk"] / by_peril["earned_premium_dkk"]
-    return by_peril.reset_index()
+    columns = [
+        "policy_count",
+        "earned_premium_dkk",
+        "incurred_loss_dkk",
+        "loss_ratio",
+        "claim_count",
+        "largest_claim_dkk",
+    ]
+    return by_peril[columns].reset_index()
