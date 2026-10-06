@@ -2,9 +2,20 @@
 
 A small server that returns loss experience per peril for a portfolio, in DKK.
 
+## Dependencies
+
+- `panel`
+- `pandas`
+- `tornado`
+- `json` (part of the Python standard library, nothing to install)
+
+```bash
+pip install panel pandas tornado
+```
+
 ## Run the server
 
-Requires Python with `pandas` and `panel` installed (e.g. `conda activate Envira`).
+Activate an environment with the dependencies above (e.g. `conda activate Envira`).
 
 ```bash
 python server.py
