@@ -1,5 +1,6 @@
 import json
 
+import pandas as pd
 import panel as pn
 from tornado.web import RequestHandler
 
@@ -21,8 +22,22 @@ class LossExperienceHandler(RequestHandler):
         self.write(json.dumps({"portfolio_id": portfolio_id, "perils": json.loads(table.to_json(orient="records"))}))
 
 
+def watch_portfolio_input(text_input, dataframe):
+    def update_table(event):
+        dataframe.value = loss_experience(POLICY_TABLE, event.new.strip())
+
+    text_input.param.watch(update_table, "value")
+
+
 def index():
-    return pn.pane.Markdown("# Envira loss-experience service")
+    text_input = pn.widgets.TextInput(name="Type portfolio ID")
+    dataframe = pn.widgets.DataFrame(pd.DataFrame())
+    watch_portfolio_input(text_input, dataframe)
+    return pn.Column(
+        pn.pane.Markdown("# Envira loss-experience service"),
+        text_input,
+        dataframe,
+    )
 
 
 if __name__ == "__main__":
